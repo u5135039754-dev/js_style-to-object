@@ -6,26 +6,17 @@
  */
 
 function convertToObject(sourceString) {
-  const newSourceString = sourceString.split(';');
-  const resSourceString = [];
+  const cleanedString = sourceString.split(';');
+  const elementsOfString = cleanedString.reduce((prev, current) => {
+    const [key, value] = current.split(':');
 
-  for (let i = 0; i < newSourceString.length; i++) {
-    const [key, value] = newSourceString[i].split(':');
-
-    if (key.trim() && value) {
-      resSourceString.push({ [key.trim()]: value.trim() });
+    if (key && value) {
+      prev[key.trim()] = value.trim();
     }
-  }
 
-  const styles = resSourceString.reduce((accum, currentValue) => {
-    const [key, value] = Object.entries(currentValue)[0];
-
-    accum[key] = value;
-
-    return accum;
+    return prev;
   }, {});
 
-  return styles;
+  return elementsOfString;
 }
-
 module.exports = convertToObject;
