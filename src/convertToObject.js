@@ -10,7 +10,7 @@ function convertToObject(sourceString) {
   const elementsOfString = cleanedString.reduce((prev, current) => {
     const [key, value] = current.split(':');
 
-    if (key && value) {
+    if (key.trim() && value) {
       prev[key.trim()] = value.trim();
     }
 
